@@ -1,0 +1,11 @@
+.content .login{
+  width: 340px;
+  margin: 50px auto;
+  padding: 50px 20px;
+  background-color: white;
+  border: 1px solid rgb(180, 177, 178);
+  background-color: rgb(255, 255, 255);
+}
+.input-group{
+    margin:20px auto;
+}
