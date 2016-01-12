@@ -5,10 +5,10 @@ define(function (require, exports, module) {
         init:  function () {
             app.query();
             app.addRole();
-            $("#query").click();
+            $("#btnQuery").click();
         },
         query:function(){
-            $("#query").click(function(){
+            $("#btnQuery").click(function(){
                 $.ajax({
                     type: "GET",
                     url: "/getUser",
@@ -33,7 +33,7 @@ define(function (require, exports, module) {
                     closeBtn: 1, //不显示关闭按钮
                     shift: 2,
                     shadeClose: true, //开启遮罩关闭
-                    content: $("layer-addRole")
+                    content: $("#layer-addRole").html()
                 });
             });
         }

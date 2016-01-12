@@ -52,9 +52,9 @@ module.exports.delete=function(opts){
 module.exports.select=function(opts){
 	var selectData = function(db,opts,callback) {
 		var collection = opts.collection,
-			doc = opts.doc;
-
-		db.collection(collection).find(doc).toArray(function (err, result) {
+			doc = opts.doc,
+            sort=opts.sort;
+		db.collection(collection).find(doc).sort(sort).toArray(function (err, result) {
 			if (err) {
 				console.log('Error:' + err);
 				return;

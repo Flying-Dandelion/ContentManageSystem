@@ -12,26 +12,24 @@
         <div class="content">
         <div class="form-inline mar-bottom20">
             <div class="form-group">
-                用户名：<input type="text" class="form-control input-sm" id="txtUserName" />
-            </div>
-            <div class="form-group">
-                手机号：<input type="text" class="form-control input-sm" id="txtPhone" />
+                角色：<select class="input-sm" id="selRole">
+                    <option value="">全部</option>
+                    <option value="1">系统管理员</option>
+                    <option value="2">采购员</option>
+                    <option value="3">销售员</option>
+                    <option value="0">普通用户</option>
+                </select>
             </div>
             <input type="button" class="btn btn-sm btn-danger" value="查询" id="btnQuery" />
-            <input type="button" class="btn btn-sm btn-danger" value="清除条件" id="btnClear" />
-            <a href="/userMsg/addUserPage" class="btn btn-sm btn-danger">新建用户</a>
         </div>
         <table class="table table-striped" >
             <thead>
             <tr>
-                <th>用户名</th>
-                <th>手机号码</th>
-                <th>角色</th>
-                <th>注册时间</th>
-                <th>操作</th>
+                <th>角色名</th>
+                <th>权限</th>
             </tr>
             </thead>
-            <tbody id="userList">
+            <tbody id="roleList">
             </tbody>
         </table>
     </div>
@@ -39,17 +37,14 @@
 </section>
 <%- include ../layouts/footer.ejs %>
 <script type="text/javascript">
-    seajs.use("/javascripts/userMsg/userList", function(userList){
-        userList.init();
+    seajs.use("/javascripts/roleMsg", function(roleMsg){
+        roleMsg.init();
     });
-
 </script>
 <script type="text/x-jsrender" id="template">
 			<tr>
-				<td>{{:username}}</td>
-				<td>{{:phone}}</td>
-				<td>{{:addTime}}</td>
-				<td>{{:phone}}</td>
+				<td>{{:rolename}}</td>
+				<td>{{:roleid}}</td>
 			</tr>
 	</script>
 </body>

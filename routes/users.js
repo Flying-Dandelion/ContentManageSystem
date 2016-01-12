@@ -1,6 +1,6 @@
-/*routes ÀàËÆÓÚcontroller*/
+/*routes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½controller*/
 var express = require('express');
-var nameBusiness = require("../business/nameHandler.js");
+var nameBusiness = require("../business/userMsgHandler.js");
 
 var router = express.Router();
 
@@ -15,7 +15,7 @@ router.post('/login', function (req, res, next) {
     "name": req.body.test
   };
 
-  //µ÷ÓÃÒµÎñ²ã´¦ÀíÊı¾İ
+  //ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ã´¦ï¿½ï¿½ï¿½ï¿½ï¿½
   nameBusiness.insert(doc, function(result){
     res.json(result.result);
   });

@@ -3,47 +3,13 @@
 <%- include layouts/head.ejs %>
 <body>
 <section class="main">
-    <%- include layouts/menu.ejs %>
-    <div class="container content">
-        <div class="form-inline mar-bottom20">
-            <div class="form-group">
-                用户名：<input type="text" class="form-control input-sm" id="txtUserName" />
-            </div>
-            <div class="form-group">
-                手机号：<input type="text" class="form-control input-sm" id="txtPhone" />
-            </div>
-            <input type="button" class="btn btn-sm btn-danger" value="查询" id="query" />
-        </div>
-        <table class="table table-striped" >
-            <thead>
-            <tr>
-                <th>用户名</th>
-                <th>手机号码</th>
-                <th>注册时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody id="userList">
-            </tbody>
-        </table>
+    <div class="container">
+        <%- include layouts/menu.ejs %>
+       <div class="content">
+           欢迎进入
+       </div>
     </div>
 </section>
-
-<%- include layouts/footer.ejs %>
-
-<script type="text/javascript">
-    seajs.use("index", function(index){
-        index.init();
-    });
-</script>
-<script type="text/x-jsrender" id="template">
-			<tr>
-				<td>{{:username}}</td>
-				<td>{{:phone}}</td>
-				<td>{{:addTime}}</td>
-				<td>{{:phone}}</td>
-			</tr>
-	</script>
 </body>
 
 </html>
