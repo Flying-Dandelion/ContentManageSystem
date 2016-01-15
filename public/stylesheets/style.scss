@@ -20,6 +20,9 @@ body {
   border-radius: 0;
   background-color: #eee;
 }
+dl{
+  padding-right: 100px;
+}
 .top{
   background-color: $main-bg-color;
 }
@@ -67,4 +70,49 @@ body {
 .content{
   padding:40px 20px;
   background-color: #ffffff;
+}
+
+/*page-bar*/
+ul,li{
+  margin: 0px;
+  padding: 0px;
+}
+
+.page-bar ul{
+  display: table;
+  margin:auto;
+}
+.page-bar li{
+  list-style: none;
+  display: inline;
+  float: left;
+}
+.page-bar li:first-child>a {
+  margin-left: 0px
+}
+.page-bar a{
+  border: 1px solid #ddd;
+  text-decoration: none;
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #d9534f;
+  cursor: pointer
+}
+.page-bar a:hover{
+  background-color: #eee;
+}
+.page-bar .active a{
+  color: #fff;
+  cursor: default;
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+.page-bar i{
+  font-style:normal;
+  color: #009329;
+  margin: 0px 4px;
+  font-size: 12px;
 }

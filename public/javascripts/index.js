@@ -16,6 +16,7 @@ define(function (require, exports, module) {
                 var data= {
                     username: $("#txtUserName").val(),
                     phone: $("#txtPhone").val()
+
                 };
                 $.ajax({
                     type: "GET",

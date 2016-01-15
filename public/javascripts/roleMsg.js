@@ -8,8 +8,12 @@ define(function (require, exports, module) {
         query:function(){
             $("#btnQuery").click(function(){
                 var data= {roleid: $("#selRole").val(),
-                    sort:{roleid:1}
-                            };
+                            sort:{
+                                name:"roleid",
+                                type:1
+                            },
+                            field:["rolename","roleid"]
+                        };
                 $.ajax({
                     type: "GET",
                     url: "/getRole",

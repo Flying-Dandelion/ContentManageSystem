@@ -42,11 +42,16 @@
     });
 </script>
 <script type="text/x-jsrender" id="template">
+{{if data[0].count>0}}
+{{for}}
 			<tr>
 				<td>{{:rolename}}</td>
 				<td>{{:roleid}}</td>
 			</tr>
+			{{/for}}
+			{{else}}
+			<div>没有查到数据</div>
+			{{/if}}
 	</script>
 </body>
-
 </html>

@@ -2,7 +2,7 @@
 var express = require('express');
 var userMsgHandler = require("../business/userMsgHandler.js");
 var sysMsgHandler = require("../business/sysMsgHandler.js");
-
+var ObjectID = require('mongodb').ObjectID;
 var router = express.Router();
 
 /* GET login page. */
@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
 
 /* GET index page. */
 router.get('/index', function (req, res, next) {
-    console.log("success");
     res.render("index",{"title":"首页",menu:""});
 });
 
@@ -36,20 +35,26 @@ router.post('/login', function (req, res, next) {
     "phone": req.body.phone,
     "password": req.body.password
   };
-    userMsgHandler.userLogin(doc, function(result){
+    userMsgHandler.userLogin(doc,function(result){
     res.json(result);
   });
 });
 
 /* getUser. */
 router.get('/getUser', function (req, res, next) {
-    var doc={};
+    var doc={},info={},query={};
     if(req.query.phone !== undefined && req.query.phone !== ""){
-        doc.phone=req.query.phone;
+        query.phone=req.query.phone;
     }
     if(req.query.username !== undefined && req.query.username!==""){
-        doc.username=req.query.username;
+        query.username=req.query.username;
     }
+    query.addtime={$gte:req.query.startaddtime+" 00:00:00",$lte:req.query.endaddtime+" 23:59:59"};
+    info.query=query;
+    info.limit=req.query.limit*1;
+    info.skip=req.query.skip*1;
+    console.log(info);
+    doc.procedure = "getUser('" + JSON.stringify(info) + "')";
     userMsgHandler.getUser(doc,function (result) {
     res.json(result);
   });
@@ -57,28 +62,26 @@ router.get('/getUser', function (req, res, next) {
 
 /* getRole. */
 router.get('/getRole', function (req, res, next) {
-    var doc={},sort={};
+    var doc={},sort={},field={};
     if(req.query.roleid !== undefined && req.query.roleid!==""){
-        doc.roleid=req.query.roleid;
+        doc.roleid=req.query.roleid*1;
     }
-    if(req.query.sort !== undefined && req.query.sort!==""){
-        sort.roleid=parseInt(req.query.sort.roleid) ;
-    }
-    sysMsgHandler.getRole(doc,sort,function (result) {
+    sort=req.query.sort;
+    field=req.query.field;
+    sysMsgHandler.getRole(doc,sort,field,function (result) {
         res.json(result);
     });
 });
 
-/* addUserRole. */
-router.get('/userMsg/addUserRole', function (req, res, next) {
+/* addUser. */
+router.post('/addUser', function (req, res, next) {
     var doc={};
-    if(req.body.phone !== undefined && req.body.phone !== ""){
-        doc.phone=req.body.phone;
-    }
-    if(req.body.username !== undefined && req.body.username!==""){
-        doc.username=req.body.username;
-    }
-    userMsgHandler.getUser(doc,function (result) {
+    doc.username=req.body.username;
+    doc.phone=req.body.phone;
+    doc.addtime=req.body.addtime;
+    doc.password=req.body.password;
+    doc.roleinfo=new ObjectID(req.body.roleinfo);
+    userMsgHandler.addUser(doc,function (result) {
         res.json(result);
     });
 });
