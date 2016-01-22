@@ -19,12 +19,22 @@
         </ul>
         <div class="content">
             <input id="pageIndex" type="hidden" value="1"/>
+            <input id="type" type="hidden" value="0"/>
         <div class="form-inline mar-bottom20">
             <div class="form-group">
                 用户名：<input type="text" class="form-control input-sm w100" id="txtUserName" />
             </div>
             <div class="form-group">
                 手机号：<input type="text" class="form-control input-sm w100" id="txtPhone" />
+            </div>
+            <div class="form-group">
+                角色：<select class="form-control input-sm  w100" id="txtRole">
+                    <option value="">全部</option>
+                    <option value="0">系统管理员</option>
+                    <option value="1">采购员</option>
+                    <option value="2">销售员</option>
+                    <option value="3">普通用户</option>
+                </select>
             </div>
             <div class="form-group">
                 注册时间：<input type="text" class="form-control input-sm w100"  id="txtAddTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtAddTimeEnd\')}',isShowClear:false,readOnly:true})"  />
@@ -47,13 +57,13 @@
             <tbody id="userList">
                 <template  v-for="item in items">
                     <tr>
-                    <td>{{ item.username }}</td>
+                    <td>{{ item.name }}</td>
                     <td>{{ item.phone }}</td>
                     <td>{{ item.addtime }}</td>
                     <td>{{ item.rolename }}</td>
                     <td>
-                        <a href="{{ item._id }}">重置密码</a>
-                        <a href="{{ item._id }}">删除</a>
+                        <a href="javascript:void(0);" onclick="editUser('{{ item.name }}','{{ item.phone }}','{{ item.role }}','{{ item.password }}')">修改信息</a>
+                        <a href="javascript:void(0);" onclick="deleteUser('{{ item.phone }}')">删除</a>
                     </td>
                     </tr>
                 </template >
@@ -93,14 +103,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inRole" class="col-sm-5 control-label"><span class="red">*</span>角色</label>
+            <label for="inRole" class="col-sm-5 control-label">角色</label>
             <div class="col-sm-7">
                 <select class="form-control input-sm" id="selRole">
-                    <option value="">全部</option>
-                    <option value="5694961be296ff322cd425cd">系统管理员</option>
-                    <option value="569496e3e296ff34141a939e">采购员</option>
-                    <option value="569496f5e296ff34141a939f">销售员</option>
-                    <option value="56949710e296ff34141a93a0">普通用户</option>
+                    <option value="0">系统管理员</option>
+                    <option value="1">采购员</option>
+                    <option value="2">销售员</option>
+                    <option value="3">普通用户</option>
                 </select>
             </div>
         </div>
@@ -115,25 +124,11 @@
 <%- include ../layouts/footer.ejs %>
 <script src="/javascripts/common/vue.js"></script>
 <script src="/javascripts/common/page.js"></script>
-<script src="/javascripts/userMsg/userlistTemplate.js"></script>
 <script type="text/javascript">
     seajs.use("/javascripts/userMsg/userList", function(userList){
         userList.init();
     });
 
 </script>
-<!--<script type="text/x-jsrender" id="template">-->
-			<!--<tr>-->
-				<!--<td>{{:username}}</td>-->
-				<!--<td>{{:phone}}</td>-->
-				<!--<td>{{:addtime}}</td>-->
-				<!--<td>{{:rolename}}</td>-->
-                <!--<td>-->
-                    <!--<a href="{{:_id}}">重置密码</a>-->
-                    <!--<a href="{{:_id}}">删除</a>-->
-                <!--</td>-->
-			<!--</tr>-->
-	<!--</script>-->
-<!--</body>-->
-
+</body>
 </html>

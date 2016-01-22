@@ -16,12 +16,10 @@ exports.userLogin = function(doc,callback){
     //insert方法： 插入一条或多条数据。
     dbHelper.select(opts);
 };
-exports.getRole=function(doc,sort,field,callback){
+exports.getRole=function(doc,callback){
     var opts = {
         "collection": "roles",
         "doc": doc,
-        "sort":sort,
-        "field":field,
         callback: callback
     };
     dbHelper.select(opts);
