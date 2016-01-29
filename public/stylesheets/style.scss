@@ -116,3 +116,24 @@ ul,li{
   margin: 0px 4px;
   font-size: 12px;
 }
+/*文件上传*/
+.uploadPhoto{
+  #photoShow{
+    width:100%;
+    margin-top:10px;
+  }
+  .photo-item{
+    width:auto;
+    display: inline-block;
+    border:1px solid #ddd;
+    padding:2px;
+    margin:2px;
+    img{
+      display: block;
+      width:176px;
+      height:96px;
+      border:0;
+      cursor:pointer;
+    }
+  }
+}

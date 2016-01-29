@@ -27,8 +27,15 @@ define(function (require, exports, module) {
 			});
 			promise
 				.then(function (res) {
-					if (res.ok !== 1) return;
-					location.href="/index";
+					if (res.ok !== 1)
+                        return;
+                    if(res.result.length>0){
+                        location.href="/index";
+                    }
+                    else{
+                        layer.alert("用户名或密码错误！");
+                        return;
+                    }
 				})
 				.catch(function (err) {
 					console.log(err);

@@ -32,7 +32,7 @@
             </div>
             <input type="button" class="btn btn-sm btn-danger" value="查询" id="btnQuery" />
             <input type="button" class="btn btn-sm btn-default" value="清除条件" id="btnClear" />
-            <a href="#" class="btn btn-sm btn-danger">添加用户</a>
+            <a href="/productMsg/addProduct" class="btn btn-sm btn-danger">添加商品</a>
         </div>
         <table class="table table-striped text-center" >
             <thead>
@@ -58,8 +58,8 @@
                         <td>{{ item.sales }}</td>
                         <td>{{ item.status }}</td>
                         <td>
-                            <a href="{{ item._id }}">修改</a>
-                            <a href="{{ item._id }}">查看详情</a>
+                            <a href="edit('{{ item._id }}')">修改</a>
+                            <a href="detail('{{ item._id }}')">查看详情</a>
                             <a href="{{ item._id }}">下架</a>
                         </td>
                     </tr>
