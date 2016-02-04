@@ -21,9 +21,9 @@ exports.getProduct=function(doc,callback){
  * @param doc
  * @param callback
  */
-exports.addUser = function (doc, callback) {
+exports.addProduct = function (doc, callback) {
     var opts = {
-        "collection": "users",
+        "collection": "products",
         "doc": doc,
         callback: callback
     };
@@ -62,4 +62,32 @@ exports.editUser = function (doc, callback) {
     console.log(doc);
     //insert方法： 插入一条或多条数据。
     dbHelper.update(opts);
+};
+
+/**
+ * 获取商品分类
+ * @param doc
+ * @param callback
+ */
+exports.getProductType=function(doc,callback){
+    var opts = {
+        "collection": "productType",
+        "doc": doc,
+        callback: callback
+    };
+    dbHelper.select(opts);
+};
+
+/**
+ * 获取商品编号
+ * @param doc
+ * @param callback
+ */
+exports.getProductNum=function(doc,callback){
+    var opts = {
+        "collection": "products",
+        "doc": doc,
+        callback: callback
+    };
+    dbHelper.aggregate(opts);
 };

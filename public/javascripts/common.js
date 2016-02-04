@@ -36,3 +36,13 @@ function getObjectURL(file) {
     }
     return url;
 }
+function getString(digit,num){
+    if(num.toString().length<digit){
+        var length=digit-num.toString().length,zeroChar="";
+        for(var i=0;i<length;i++){
+            zeroChar+="0";
+        }
+        return zeroChar+num;
+    }
+    return num;
+}
