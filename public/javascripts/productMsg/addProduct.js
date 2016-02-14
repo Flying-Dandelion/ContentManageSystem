@@ -11,11 +11,17 @@ define(function (require, exports, module) {
             },
             initData: function () {
                 var search = window.location.search.substring(1),
-                    keyAry = search.split('&'), key = '';
+                    keyAry = search.split('&'), type = '',proNum="",addtime="";
                 $.each(keyAry, function (key, item) {
                     var itemValue = item.split('=');
-                    if (itemValue.length > 1 && itemValue[0] == "key") {
-                        key = itemValue[1];
+                    if (itemValue.length > 1 && itemValue[0] == "type") {
+                        type = itemValue[1];
+                    }
+                    if (itemValue.length > 1 && itemValue[0] == "proNum") {
+                        proNum = itemValue[1];
+                    }
+                    if (itemValue.length > 1 && itemValue[0] == "addtime") {
+                        addtime = itemValue[1].substring(0,10);
                     }
                 });
                 $.ajax({
@@ -48,21 +54,33 @@ define(function (require, exports, module) {
                         layer.alert("获取商品编号出错！");
                     }
                 });
-                //$.ajax({
-                //    type: "GET",
-                //    data: {
-                //        key: key,
-                //        limit: 1,
-                //        skip: 0
-                //    },
-                //    url: "/getProduct",
-                //    success: function (data) {
-                //
-                //    },
-                //    error: function (data) {
-                //
-                //    }
-                //})
+                $.ajax({
+                    type: "GET",
+                    data: {
+                        type: type,
+                        productNum:proNum,
+                        startaddtime:addtime,
+                        endaddtime:addtime,
+                        limit: 1,
+                        skip: 0
+                    },
+                    url: "/getProduct",
+                    success: function (data) {
+                        if(data.ok==1 && data.result.length>0){
+                            var res=data.result[0];
+                            $("#txtProductName").val(res.name);
+                            $("#txtProductType").val(res.type);
+                            $("#txtPrice").val(res.price);
+                            $("#txtInventory").val(res.inventory);
+                            $("#txtProductStatus").val(res.status);
+                            $("#txtIntroduce").val(res.introduce);
+                            $("#txtDescribe").val(res.describe);
+                        }
+                    },
+                    error: function (data) {
+
+                    }
+                })
             },
             photoShow: function (obj) {
                 for (var i = 0; i < $(obj)[0].files.length; i++) {
@@ -92,6 +110,9 @@ define(function (require, exports, module) {
             },
             save: function () {
                 $("#btnAddProduct").click(function () {
+                    if(!app.valuable($.serializeJson($("#addProduct input")))){
+                        return;
+                    }
                     var file=[],
                         photo="",photoCount= 0,fileObj=$(".uploadFile input[type='file']"),proNum="";
                     for(var item in app.productNum){
@@ -106,11 +127,13 @@ define(function (require, exports, module) {
                             photoCount++;
                         }
                     }
-                    $.ajax({
-                        url: "/addProduct",
-                        type: "post",
-                        data: {
-                            name:$("#txtProductName").val(),
+                    $.ajaxFileUpload({
+                        url: '/addProduct',
+                        secureuri: false,
+                        fileElementId: file,
+                        dataType : 'json',
+                        data:{
+                        name:$("#txtProductName").val(),
                             type:$("#txtProductType").val(),
                             typeName:$("#txtProductType option:selected").text(),
                             price:$("#txtPrice").val(),
@@ -121,27 +144,14 @@ define(function (require, exports, module) {
                             introduce:$("#txtIntroduce").val(),
                             describe:$("#txtDescribe").val()
                         },
-                        success: function (res) {
-                            if(res.ok==1 && res.n==1){
-                                layer.alert("基本信息保存成功");
-                            }
-                        },
-                        error: function (err) {
-
-                        }
-                    });
-                    $.ajaxFileUpload({
-                        url: '/file/uploading',
-                        secureuri: false,
-                        fileElementId: file,
-                        dataType : 'json',
-                        data:{proNum:proNum},
                         success: function (data,result) {
-                            if(result==="success"){
-                                layer.alert("图片保存成功");
+                            if(result==="success" && data.ok==1 && data.n==1){
+                                layer.alert("保存成功",function(){
+                                    window.location.href="/productMsg/productList";
+                                });
                             }
                             else {
-                                layer.alert("图片保存成功");
+                                layer.alert("保存失败");
                             }
                         },
                         error: function (data) {
@@ -149,6 +159,17 @@ define(function (require, exports, module) {
                         }
                     });
                 });
+            },
+            valuable:function(data){
+                var flag=true;
+                $.each(data, function(key, value) {
+                    if(value==""){
+                        layer.alert("表单的输入框不允许为空！");
+                        flag=false;
+                        return false;
+                    }
+                });
+                return flag;
             }
         }
         ;

@@ -10,36 +10,36 @@
             <li>添加商品</li>
         </ul>
         <div class="content">
-            <div class="form-horizontal" id="content">
+            <form id="addProduct" action="/addProduct" enctype="multipart/form-data" method="post" class="form-horizontal" id="content">
                 <div class="form-group">
                     <label for="inPhone" class="col-sm-3 control-label"><span class="red">*</span>商品名称</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control input-sm" id="txtProductName" placeholder="商品名称">
+                        <input type="text" class="form-control input-sm" id="txtProductName" name="txtProductName" placeholder="商品名称" maxlength="15">
                     </div>
                     </div>
                 <div class="form-group">
                     <label for="inUsername" class="col-sm-3 control-label">类别</label>
                     <div class="col-sm-3">
-                        <select class="form-control input-sm" id="txtProductType">
+                        <select class="form-control input-sm" id="txtProductType" name="txtProductType">
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="txtPrice" class="col-sm-3 control-label">单价</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control input-sm" id="txtPrice" placeholder="商品单价">
+                        <input type="text" class="form-control input-sm" id="txtPrice" name="txtPrice" placeholder="商品单价" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onchange="this.value=this.value.replace(/\D/g,'')">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="txtInventory" class="col-sm-3 control-label">库存</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control input-sm" id="txtInventory" placeholder="商品库存">
+                        <input type="text" class="form-control input-sm" id="txtInventory" name="txtInventory" placeholder="商品库存" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onchange="this.value=this.value.replace(/\D/g,'')">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="txtProductStatus" class="col-sm-3 control-label">状态</label>
                     <div class="col-sm-3">
-                        <select class="form-control input-sm" id="txtProductStatus">
+                        <select class="form-control input-sm" id="txtProductStatus" name="txtProductStatus">
                             <option value="1">在售</option>
                             <option value="2">售罄</option>
                             <option value="0">下架</option>
@@ -50,8 +50,8 @@
                     <label for="inUsername" class="col-sm-3 control-label">图片</label>
                     <div class="col-sm-7 uploadPhoto">
                         <div class="uploadFile">
-                        <input type="button" class="btn btn-danger btn-sm w100" value="选择图片"/>
-                        <input type="file" id="inPhoto0" name="uploadFile" class="btn btn-sm w100 inPhoto" style="position:absolute;margin-top: -30px;opacity: 0;" multiple />
+                            <input type="button" class="btn btn-danger btn-sm w100" value="选择图片"/>
+                            <input type="file" id="inPhoto0" name="uploadFile" class="btn btn-sm w100 inPhoto" style="position:absolute;margin-top: -30px;opacity: 0;" multiple />
                         </div>
                         <div id="photoShow">
                         </div>
@@ -61,13 +61,13 @@
                 <div class="form-group">
                     <label for="txtIntroduce" class="col-sm-3 control-label">介绍</label>
                     <div class="col-sm-6">
-                        <textarea type="text" class="form-control input-sm" id="txtIntroduce" rows="4" maxlength="150" placeholder="介绍不超过150字"></textarea>
+                        <textarea type="text" class="form-control input-sm" id="txtIntroduce" name="txtIntroduce" rows="4" maxlength="150" placeholder="介绍不超过150字"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="txtDescribe" class="col-sm-3 control-label">描述</label>
                     <div class="col-sm-6">
-                        <textarea type="text" class="form-control input-sm" id="txtDescribe" rows="12" maxlength="500" placeholder="描述不超过500字"></textarea>
+                        <textarea type="text" class="form-control input-sm" id="txtDescribe" name="txtDescribe" rows="12" maxlength="500" placeholder="描述不超过500字"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +75,7 @@
                         <input type="button" class="btn btn-sm btn-danger w100"  value="保存" id="btnAddProduct"/>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>

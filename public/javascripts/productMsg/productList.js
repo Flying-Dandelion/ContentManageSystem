@@ -11,7 +11,6 @@ define(function (require, exports, module) {
         },
         initDate:function(){
             var date=new Date();
-            $("#txtAddTimeStart").val(moment(date).format("YYYY-MM-DD"));
             $("#txtAddTimeEnd").val(moment(date).format("YYYY-MM-DD"));
         },
         query:function(){
@@ -27,7 +26,8 @@ define(function (require, exports, module) {
                         endaddtime: $("#txtAddTimeEnd").val(),
                         status:$("#txtProductStatus").val(),
                         limit:app.pageCount,
-                        skip:(page-1)*app.pageCount
+                        skip:(page-1)*app.pageCount,
+                        sort:{"addtime":1}
                     },
                     success:function(res){
                         var count=0;

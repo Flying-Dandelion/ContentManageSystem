@@ -158,9 +158,11 @@ router.get('/getProduct', function (req, res, next) {
     if (req.query.status !== undefined && req.query.status !== "") {
         query.status = req.query.status;
     }
-    if (req.query.key !== undefined && req.query.key !== "") {
-        query.key = req.query.key;
+    if (req.query.productNum !== undefined && req.query.productNum !== "") {
+        query.productNum = req.query.productNum;
     }
+
+    doc.sort = req.query.sort;
     query.addtime = {$gte: req.query.startaddtime + " 00:00:00", $lte: req.query.endaddtime + " 23:59:59"};
     doc.query = query;
     doc.limit = req.query.limit * 1;
@@ -242,74 +244,23 @@ router.get('/getProductNum', function (req, res, next) {
     productMsgHandler.getProductNum(doc, function (result) {
         res.json(result);
     });
-
-    //var queryDoc = {}, query = {}, doc = {};
-    //query.type = req.body.type;
-    //queryDoc.query = query;
-    //queryDoc.limit = 1;
-    //queryDoc.skip = 0;
-    //queryDoc.sort={ name:"productNum",type:1};
-    //queryDoc.field=["productNum"];
-    //doc.name = req.body.name;
-    //doc.type = req.body.type;
-    //doc.typeName=req.body.typeName;
-    //doc.addtime = commonHandler.getTime();
-    //doc.updatetime = doc.addtime;
-    //doc.price = req.body.price;
-    //doc.inventory = req.body.inventory;
-    //doc.status=req.body.status;
-    //doc.introduce=req.body.introduce;
-    //doc.describe=req.body.describe;
-    //productMsgHandler.getProduct(queryDoc, function (result) {
-    //    doc.productNum= result.result.length==0?"000001":exports.getString(6,result.result.productNum+1);
-    //    if(result.ok == 1){
-    //        var photoAry=req.body.photo.split('|');
-    //        for(var item in photoAry){
-    //            photoAry[item]=doc.type+doc.productNum+photoAry[item];
-    //        }
-    //        doc.photo=photoAry.toString();
-    //        productMsgHandler.addProduct(doc, function (result) {
-    //            res.json(result);
-    //        });
-    //    }
-    //    res.json({ok:0,result:"添加出错"});
-    //});
-
 });
 /**
  * addProduct
  */
 router.post('/addProduct', function (req, res, next) {
-    var  doc = {};
-    doc.name = req.body.name;
-    doc.type = req.body.type;
-    doc.typeName=req.body.typeName;
-    doc.addtime = commonHandler.getTime();
-    doc.updatetime = doc.addtime;
-    doc.price = req.body.price;
-    doc.inventory = req.body.inventory;
-    doc.status=req.body.status;
-    doc.introduce=req.body.introduce;
-    doc.describe=req.body.describe;
-    doc.productNum=req.body.proNum;
-    productMsgHandler.addProduct(doc, function (result) {
-        res.json(result);
-    });
-});
-
-/* 上传图片 */
-router.post('/file/uploading', function (req, res, next) {
     //生成multiparty对象，并配置上传目标路径
     var form = new multiparty.Form({uploadDir: './public/files/'});
     //上传完成后处理
     form.parse(req, function (err, fields, files) {
+        console.log(fields,files);
         var filesTmp = JSON.stringify(files, null, 2);
         if (err) {
             console.log('parse error: ' + err);
         } else {
             console.log('parse files: ' + filesTmp);
             if(files.uploadFile!==undefined) {
-                for (var i = 0; i < files.uploadFile.length; i++) {
+                for (var i = 0; i < files.uploadFile.length-1; i++) {
                     var inputFile = files.uploadFile[i];
                     var uploadedPath = inputFile.path;
                     var dstPath = './public/files/' + fields.proNum + i + inputFile.originalFilename;
@@ -326,8 +277,22 @@ router.post('/file/uploading', function (req, res, next) {
                 }
             }
         }
+        var  doc = {};
+        doc.name = fields.name;
+        doc.type = fields.type;
+        doc.typeName=fields.typeName;
+        doc.addtime = commonHandler.getTime();
+        doc.updatetime = doc.addtime;
+        doc.price = fields.price;
+        doc.inventory = fields.inventory;
+        doc.status=fields.status;
+        doc.introduce=fields.introduce;
+        doc.describe=fields.describe;
+        doc.productNum=fields.proNum;
+        productMsgHandler.addProduct(doc, function (result) {
+           res.send(result);
+        });
     });
-    return;
 });
 
 module.exports = router;

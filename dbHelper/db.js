@@ -26,7 +26,7 @@ module.exports.insert=function(opts){
 
 	MClient.connect(uri, function(err, db) {
 		insertData(db,opts, function(result,callback) {
-			callback(result.result);
+			callback(JSON.stringify(result.result));
 			db.close();
 		});
 	});

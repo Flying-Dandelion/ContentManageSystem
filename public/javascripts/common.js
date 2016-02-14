@@ -46,3 +46,43 @@ function getString(digit,num){
     }
     return num;
 }
+// 转义"\"特殊字符
+function filterKeyWord ( strKeyWord ){
+    if (strKeyWord.indexOf ("\\" ) === -1) { return strKeyWord; }
+
+    var str = strKeyWord.split ("\\" );
+    var len = str.length;
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+        var keyValue = str[i];
+        arr.push (keyValue );
+    }
+
+    return arr.join ("\\\\" );
+}
+(function($){
+    $.extend({
+        serializeJson : function ( obj ){
+            var self = $ (obj );
+            var serializeObj = {};
+            var array = self.serializeArray ();
+            var str = self.serialize ();
+            $ (array ).each (function ( ){
+                this.value = filterKeyWord (this.value );
+                if (serializeObj[this.name]) {
+                    if ($.isArray (serializeObj[this.name] )) {
+                        serializeObj[this.name].push (this.value );
+                    }
+                    else {
+                        serializeObj[this.name] = [ serializeObj[this.name], this.value ];
+                    }
+                }
+                else {
+                    serializeObj[this.name] = this.value;
+                }
+            } );
+
+            return serializeObj;
+        }
+    });
+})(jQuery );

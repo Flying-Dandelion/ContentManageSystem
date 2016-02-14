@@ -96,7 +96,8 @@ define(function (require, exports, module) {
                             role: $("#selRole").val(),
                             password: $("#inPWD").val()
                         },
-                        success: function (res) {
+                        success: function (data) {
+                            var res=JSON.parse(data);
                             if (res.ok !== 1) {
                                 layer.alert("添加失败!");
                                 return;
@@ -152,28 +153,30 @@ function deleteUser(phone){
         layer.alert("数据有误!");
         return;
     }
-    $.ajax({
-        type: "POST",
-        url: "/deleteUser",
-        data: {phone: phone},
-        success: function (res) {
-            if(res.ok !== 1){
-                layer.alert("删除失败!");
-                return;
+    layer.confirm("删除该条数据？",function(){
+        $.ajax({
+            type: "POST",
+            url: "/deleteUser",
+            data: {phone: phone},
+            success: function (res) {
+                if(res.ok !== 1){
+                    layer.alert("删除失败!");
+                    return;
+                }
+                if(res.n===0){
+                    layer.alert("未找到指定数据!");
+                    return;
+                }
+                layer.alert("删除成功!",function(index){
+                    $("#btnQuery").click();
+                    layer.close(index);
+                });
+            },
+            error: function (err) {
+                layer.alert("删除出错!");
+                console.log(err);
             }
-            if(res.n===0){
-                layer.alert("未找到指定数据!");
-                return;
-            }
-            layer.alert("删除成功!",function(index){
-                $("#btnQuery").click();
-                layer.close(index);
-            });
-        },
-        error: function (err) {
-            layer.alert("删除出错!");
-            console.log(err);
-        }
+        });
     });
 }
 function editUser(name,phone,role,password){
