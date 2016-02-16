@@ -27,7 +27,8 @@ define(function (require, exports, module) {
                         status:$("#txtProductStatus").val(),
                         limit:app.pageCount,
                         skip:(page-1)*app.pageCount,
-                        sort:{"addtime":1}
+                        sort:{name:"addtime",
+                            type:1}
                     },
                     success:function(res){
                         var count=0;

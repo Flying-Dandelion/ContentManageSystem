@@ -1,7 +1,4 @@
-
 jQuery.extend({
-
-
     createUploadIframe: function(id, uri)
     {
         //create frame
@@ -23,7 +20,7 @@ jQuery.extend({
 
         return jQuery('#' + frameId).get(0);
     },
-    createUploadForm: function(id, fileElementId, data)
+    createUploadForm: function(id,fileElementId,data,fileElement)
     {
         //create form
         var formId = 'jUploadForm' + id;
@@ -36,13 +33,23 @@ jQuery.extend({
                 jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
             }
         }
-        var oldElement = jQuery('#' + fileElementId);
-        var newElement = jQuery(oldElement).clone();
-        jQuery(oldElement).attr('id', fileId);
-        jQuery(oldElement).before(newElement);
-        jQuery(oldElement).appendTo(form);
-
-
+        //var oldElement;
+        //if(fileElement == null)
+        //	oldElement = jQuery('#' + fileElementId);
+        //else
+        //	oldElement = fileElement;
+        //
+        //var newElement = jQuery(oldElement).clone();
+        //jQuery(oldElement).attr('id', fileId);
+        //jQuery(oldElement).before(newElement);
+        //jQuery(oldElement).appendTo(form);
+        for(var i in fileElementId){
+            var oldElement = jQuery('#' + fileElementId[i]);
+            var newElement = jQuery(oldElement).clone();
+            jQuery(oldElement).attr('id', fileId);
+            jQuery(oldElement).before(newElement);
+            jQuery(oldElement).appendTo(form);
+        }
 
         //set attributes
         jQuery(form).css('position', 'absolute');
@@ -56,7 +63,7 @@ jQuery.extend({
         // TODO introduce global settings, allowing the client to modify them for all requests, not only timeout		
         s = jQuery.extend({}, jQuery.ajaxSettings, s);
         var id = new Date().getTime()
-        var form = jQuery.createUploadForm(id, s.fileElementId, (typeof(s.data)=='undefined'?false:s.data));
+        var form = jQuery.createUploadForm(id, s.fileElementId, (typeof(s.data)=='undefined'?false:s.data),s.fileElement);
         var io = jQuery.createUploadIframe(id, s.secureuri);
         var frameId = 'jUploadFrame' + id;
         var formId = 'jUploadForm' + id;
@@ -113,7 +120,7 @@ jQuery.extend({
                 } catch(e)
                 {
                     status = "error";
-                    ////jQuery.handleError(s, xml, status, e);
+                    jQuery.handleError(s, xml, status, e);
                 }
 
                 // The request was completed
@@ -177,14 +184,21 @@ jQuery.extend({
             jQuery.handleError(s, xml, null, e);
         }
 
-        jQuery('#' + frameId).load(uploadCallback	);
-        return {abort: function () {}};
-
+        jQuery('#' + frameId).load(uploadCallback);
+        return {abort: function(){
+            try
+            {
+                jQuery('#' + frameId).remove();
+                jQuery(form).remove();
+            }
+            catch(e){}
+        }};
     },
 
     uploadHttpData: function( r, type ) {
         var data = !type;
         data = type == "xml" || data ? r.responseXML : r.responseText;
+
         // If the type is "script", eval it in global context
         if ( type == "script" )
             jQuery.globalEval( data );
@@ -196,6 +210,15 @@ jQuery.extend({
             jQuery("<div>").html(data).evalScripts();
 
         return data;
-    }
-})
+    },
 
+    handleError: function( s, xml, status, e ) {
+        // If a local callback was specified, fire it
+        if ( s.error )
+            s.error( xml, status, e );
+
+        // Fire the global callback
+        if ( s.global )
+            jQuery.event.trigger( "ajaxError", [xml, s, e] );
+    }
+});

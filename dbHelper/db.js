@@ -99,7 +99,9 @@ module.exports.select=function(opts){
         if(doc.skip == undefined || doc.skip == null){
             doc.skip=0;
         }
-		db.collection(collection).find(doc.query,field).sort(doc.sort).limit(doc.limit).skip(doc.skip).toArray(function (err, result) {
+        console.log(sort);
+        console.log(doc.sort);
+		db.collection(collection).find(doc.query,field).sort(sort).limit(doc.limit).skip(doc.skip).toArray(function (err, result) {
 			if (err) {
 				console.log('Error:' + err);
 				return;

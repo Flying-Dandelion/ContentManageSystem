@@ -2,7 +2,6 @@ define(function (require, exports, module) {
     'use strict';
     var app = {
             photoCount: 0,
-            infileCount: 0,
             productNum:[],
             init: function () {
                 app.initData();
@@ -75,6 +74,16 @@ define(function (require, exports, module) {
                             $("#txtProductStatus").val(res.status);
                             $("#txtIntroduce").val(res.introduce);
                             $("#txtDescribe").val(res.describe);
+                            var photos=res.photo.split('|');
+                            app.photoCount=photos.length;
+                            for(var i=0;i<photos.length-1;i++){
+                                var html = "<div class='photo-item'><img title='双击删除图片' src='/files/"+photos[i]+"' id='img" + i + "'/></div>";
+                                $("#photoShow").append(html);
+                                $("#img" + i).dblclick(function () {
+                                    $(this).parent().remove();
+                                    app.photoCount--;
+                                });
+                            }
                         }
                     },
                     error: function (data) {
@@ -83,23 +92,22 @@ define(function (require, exports, module) {
                 })
             },
             photoShow: function (obj) {
-                for (var i = 0; i < $(obj)[0].files.length; i++) {
-                    var item = app.photoCount;
-                    var html = "<div class='photo-item'><img title='双击删除图片' id='img" + item + "'/></div>";
-                    $("#photoShow").append(html);
-                    if (!photoShow("inPhoto" + app.infileCount, "photoShow", "img" + item, i)) {
-                        $("#img" + item).parent().remove();
-                    } else {
-                        app.photoCount++;
-                        $("#img" + item).dblclick(function () {
-                            $(this).parent().remove();
-                        });
-                    }
+                var item = app.photoCount;
+                var html = "<div class='photo-item'><img title='双击删除图片' name='"+obj.id+"' id='img" + item + "'/></div>";
+                $("#photoShow").append(html);
+                if (!photoShow("inPhoto" + app.photoCount, "photoShow", "img" + item, 0)) {
+                    $("#img" + item).parent().remove();
+                } else {
+                    app.photoCount++;
+                    $("#img" + item).dblclick(function () {
+                        $(this).parent().remove();
+                        $("#"+this.name).remove();
+                        app.photoCount--;
+                    });
                 }
-                app.infileCount++;
                 $(obj).css("display", "none");
-                $(obj).parent().append('<input type="file" id="inPhoto' + app.infileCount + '" name="uploadFile" class="btn btn-sm w100 inPhoto" style="position:absolute;margin-top: -30px;opacity: 0;" multiple />');
-                $("#inPhoto" + app.infileCount).change(function () {
+                $(obj).parent().append('<input type="file" id="inPhoto' + app.photoCount + '" name="uploadFile" class="btn btn-sm w100 inPhoto" style="position:absolute;margin-top: -30px;opacity: 0;" />');
+                $("#inPhoto" + app.photoCount).change(function () {
                     app.photoShow(this);
                 });
             },
@@ -114,18 +122,15 @@ define(function (require, exports, module) {
                         return;
                     }
                     var file=[],
-                        photo="",photoCount= 0,fileObj=$(".uploadFile input[type='file']"),proNum="";
+                        photo="",fileObj=$(".uploadFile input[type='file']"),proNum="";
                     for(var item in app.productNum){
-                        if(app.productNum[item]._id===$("#txtProductType").val()){
+                        if(app.productNum[item]._id !== null && app.productNum[item]._id.length>0 && app.productNum[item]._id[0]===$("#txtProductType").val()){
                             proNum=app.productNum[item]._id+getString(6,parseInt(app.productNum[item].productNum)+1);
                         }
                     }
                     for(var i=0; i<fileObj.length-1;i++){
                         file[file.length]=fileObj[i].id;
-                        for(var j=0;j<fileObj[i].files.length;j++){
-                            photo+=proNum+photoCount+fileObj[i].files[j].name+"|";
-                            photoCount++;
-                        }
+                        photo+=proNum+app.photoCount+fileObj[i].files[0].name+"|";
                     }
                     $.ajaxFileUpload({
                         url: '/addProduct',
@@ -133,7 +138,7 @@ define(function (require, exports, module) {
                         fileElementId: file,
                         dataType : 'json',
                         data:{
-                        name:$("#txtProductName").val(),
+                            name:$("#txtProductName").val(),
                             type:$("#txtProductType").val(),
                             typeName:$("#txtProductType option:selected").text(),
                             price:$("#txtPrice").val(),

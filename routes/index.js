@@ -260,7 +260,7 @@ router.post('/addProduct', function (req, res, next) {
         } else {
             console.log('parse files: ' + filesTmp);
             if(files.uploadFile!==undefined) {
-                for (var i = 0; i < files.uploadFile.length-1; i++) {
+                for (var i = 0; i < files.uploadFile.length; i++) {
                     var inputFile = files.uploadFile[i];
                     var uploadedPath = inputFile.path;
                     var dstPath = './public/files/' + fields.proNum + i + inputFile.originalFilename;
@@ -278,17 +278,19 @@ router.post('/addProduct', function (req, res, next) {
             }
         }
         var  doc = {};
-        doc.name = fields.name;
-        doc.type = fields.type;
-        doc.typeName=fields.typeName;
+        doc.name = fields.name[0];
+        doc.type = fields.type[0];
+        doc.typeName=fields.typeName[0];
         doc.addtime = commonHandler.getTime();
         doc.updatetime = doc.addtime;
-        doc.price = fields.price;
-        doc.inventory = fields.inventory;
-        doc.status=fields.status;
-        doc.introduce=fields.introduce;
-        doc.describe=fields.describe;
-        doc.productNum=fields.proNum;
+        doc.price = fields.price[0];
+        doc.inventory = fields.inventory[0];
+        doc.status=fields.status[0];
+        doc.introduce=fields.introduce[0];
+        doc.describe=fields.describe[0];
+        doc.productNum=fields.proNum[0];
+        doc.photo=fields.photo[0];
+        console.log(doc);
         productMsgHandler.addProduct(doc, function (result) {
            res.send(result);
         });
