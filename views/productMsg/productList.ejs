@@ -11,29 +11,28 @@
         </ul>
         <div class="content">
             <input id="pageIndex" type="hidden" value="1"/>
-        <div class="form-inline mar-bottom20">
-            <div class="form-group">
+        <div class="mar-bottom20">
+            <div class="form-group col-sm-4">
                 商品名称：<input type="text" class="form-control input-sm w100" id="txtProductName" />
             </div>
-            <div class="form-group">
-                类别：<input type="text" class="form-control input-sm w100" id="txtProductType" />
-            </div>
-            <div class="form-group">
-                状态：<select class="form-control input-sm  w100" id="txtProductStatus">
-                    <option value="">全部</option>
-                    <option value="1">在售</option>
-                    <option value="2">售罄</option>
-                    <option value="0">下架</option>
+            <div class="form-group col-sm-4">
+                类别：<select class="form-control input-sm w100" id="txtProductType" name="txtProductType">
                 </select>
             </div>
-            <div class="form-group">
-                添加时间：<input type="text" class="form-control input-sm w100" value="2016-01-01"  id="txtAddTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtAddTimeEnd\')}',isShowClear:false,readOnly:true})"  />
-                ~<input type="text" class="form-control input-sm w100"  id="txtAddTimeEnd"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtAddTimeStart\')}',isShowClear:false,readOnly:true})" />
+            <div class="form-group col-sm-4">
+                子类别：<select class="form-control input-sm w100" id="txtProductSort" name="txtProductSort">
+                </select>
             </div>
-            <input type="button" class="btn btn-sm btn-danger" value="查询" id="btnQuery" />
-            <input type="button" class="btn btn-sm btn-default" value="清除条件" id="btnClear" />
-            <a href="/productMsg/addProduct" class="btn btn-sm btn-danger">添加商品</a>
         </div>
+            <div class="mar-bottom20">
+                <div class="form-group col-sm-8">
+                    添加时间：<input type="text" class="form-control input-sm w100" value="2016-01-01"  id="txtAddTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtAddTimeEnd\')}',isShowClear:false,readOnly:true})"  />
+                    ~<input type="text" class="form-control input-sm w100"  id="txtAddTimeEnd"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtAddTimeStart\')}',isShowClear:false,readOnly:true})" />
+                </div>
+                <input type="button" class="btn btn-sm btn-danger" value="查询" id="btnQuery" />
+                <input type="button" class="btn btn-sm btn-default" value="清除条件" id="btnClear" />
+                <a href="/productMsg/addProduct" class="btn btn-sm btn-danger">添加商品</a>
+            </div>
         <table class="table table-striped text-center" >
             <thead>
             <tr>
@@ -58,7 +57,7 @@
                         <td>{{ item.sales }}</td>
                         <td>{{ item.status }}</td>
                         <td>
-                            <a href="/productMsg/addProduct?type={{ item.type }}&proNum={{ item.productNum }}&addtime={{ item.addtime }}">修改</a>
+                            <a href="/productMsg/addProduct?type={{ item.type }}&sort={{ item.sort }}proNum={{ item.productNum }}&addtime={{ item.addtime }}">修改</a>
                             <a href="detail('{{ item._id }}')">查看详情</a>
                             <a href="{{ item._id }}">下架</a>
                         </td>

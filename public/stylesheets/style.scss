@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "base";
 $main-color: #ca1209;
 $main-bg-color:white;
@@ -135,5 +136,14 @@ ul,li{
       border:0;
       cursor:pointer;
     }
+  }
+}
+/*隐藏*/
+.hide{
+  .form-horizontal .form-group{
+    width: 400px;
+  }
+  .form-horizontal{
+    padding:30px 0;
   }
 }

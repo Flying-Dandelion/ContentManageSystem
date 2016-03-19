@@ -76,7 +76,7 @@ module.exports.update=function(opts){
 
     MClient.connect(uri, function(err, db) {
         updateData(db,opts, function(result,callback) {
-            callback(result.result);
+            callback(JSON.stringify(result.result));
             db.close();
         });
     });
@@ -99,8 +99,6 @@ module.exports.select=function(opts){
         if(doc.skip == undefined || doc.skip == null){
             doc.skip=0;
         }
-        console.log(sort);
-        console.log(doc.sort);
 		db.collection(collection).find(doc.query,field).sort(sort).limit(doc.limit).skip(doc.skip).toArray(function (err, result) {
 			if (err) {
 				console.log('Error:' + err);

@@ -75,7 +75,7 @@ define(function (require, exports, module) {
                     closeBtn: 1, //不显示关闭按钮
                     shift: 2,
                     area: ['500px', 'auto'],
-                    shadeClose: true, //开启遮罩关闭
+                    //shadeClose: true, //开启遮罩关闭
                     content: $("#layer-addUser")
                 });
             });

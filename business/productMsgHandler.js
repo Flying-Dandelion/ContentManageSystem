@@ -17,7 +17,7 @@ exports.getProduct=function(doc,callback){
 };
 
 /**
- * 添加用户
+ * 添加商品
  * @param doc
  * @param callback
  */
@@ -90,4 +90,19 @@ exports.getProductNum=function(doc,callback){
         callback: callback
     };
     dbHelper.aggregate(opts);
+};
+
+
+/**
+ * 添加子类别
+ * @param doc
+ * @param callback
+ */
+exports.addSort = function (doc, callback) {
+    var opts = {
+        "collection": "productType",
+        "doc": doc,
+        callback: callback
+    };
+    dbHelper.update(opts);
 };

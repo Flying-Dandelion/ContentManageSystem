@@ -125,7 +125,7 @@ router.post('/deleteUser', function (req, res, next) {
  */
 router.post('/editUser', function (req, res, next) {
     var doc = {}, query = {}, set = {};
-    if (req.body.phone !== undefined && req.query.phone !== "") {
+    if (req.body.phone !== undefined && req.body.phone !== "") {
         query.phone = req.body.phone;
     }
     else {
@@ -135,6 +135,23 @@ router.post('/editUser', function (req, res, next) {
     set.updatetime = commonHandler.getTime();
     set.password = req.body.password === "" ? "111111" : req.body.password;
     set.role = req.body.role;
+    switch (req.body.role) {
+        case "0":
+            set.rolename = "系统管理员";
+            break;
+        case "1":
+            set.rolename = "采购员";
+            break;
+        case "2":
+            set.rolename = "销售员";
+            break;
+        case "3":
+            set.rolename = "普通用户";
+            break;
+        default :
+            set.rolename = "普通用户";
+            break;
+    }
     doc = {
         query: query,
         set: {$set: set}
@@ -221,6 +238,33 @@ router.post('/addUser', function (req, res, next) {
 });
 
 /**
+ * addSort
+ */
+router.post('/addSort', function (req, res, next) {
+    var doc = {}, query = {}, set = {},push={};
+    if (req.body.type !== undefined && req.body.type !== "") {
+        query.type = req.body.type;
+    }
+    else {
+        res.json({ok: 1, n: 0});
+    }
+    push.name = req.body.sortName;
+    push.sort = req.body.sort;
+    set.num=req.body.count;
+    doc = {
+        query: query,
+        set: {
+            $set: set,
+            $push:{
+                typeInfo:push
+            }
+        }
+    };
+    productMsgHandler.addSort(doc, function (result) {
+        res.json(result);
+    });
+});
+/**
  * getProductType
  */
 router.get('/getProductType', function (req, res, next) {
@@ -236,7 +280,10 @@ router.get('/getProductType', function (req, res, next) {
 router.get('/getProductNum', function (req, res, next) {
     var doc = {};
     doc.$group={
-        _id:"$type",
+        _id:{
+            type:"$type",
+            sort:"$sort"
+        },
         productNum: {
             $max:"$productNum"
         }
@@ -281,6 +328,8 @@ router.post('/addProduct', function (req, res, next) {
         doc.name = fields.name[0];
         doc.type = fields.type[0];
         doc.typeName=fields.typeName[0];
+        doc.sort = fields.sort[0];
+        doc.sortName=fields.sortName[0];
         doc.addtime = commonHandler.getTime();
         doc.updatetime = doc.addtime;
         doc.price = fields.price[0];

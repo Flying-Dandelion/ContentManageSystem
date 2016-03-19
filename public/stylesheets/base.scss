@@ -1,4 +1,4 @@
-
+@charset "UTF-8";
 $type-list:top,left,right,bottom;
 $mar-pad-list:10px,20px,50px,100px;
 $height-list:200px,150px,100px,50px;
@@ -33,7 +33,7 @@ $wid-list:.2,.25,.5,.6,.75,.8,.9,.96,.98,1;
 
     }
     .w#{$item / ($item * 0 + 1)}.form-control{
-     @extend .w#{$item / ($item * 0 + 1)};
+      @extend .w#{$item / ($item * 0 + 1)};
     }
   }
   @each $item in $wid-list{

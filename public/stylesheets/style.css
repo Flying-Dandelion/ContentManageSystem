@@ -290,4 +290,10 @@ ul, li {
     border: 0;
     cursor: pointer; }
 
+/*隐藏*/
+.hide .form-horizontal .form-group {
+  width: 400px; }
+.hide .form-horizontal {
+  padding: 30px 0; }
+
 /*# sourceMappingURL=style.css.map */
