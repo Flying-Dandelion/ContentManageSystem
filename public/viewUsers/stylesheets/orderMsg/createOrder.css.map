@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAa;EACX,UAAU,EAAE,OAAO;EACnB,OAAO,EAAC,MAAM;EACd,2BAAa;IACX,IAAI,EAAC,OAAO",
+"sources": ["../../../sass/core/_page/_createOrder.scss"],
+"names": [],
+"file": "createOrder.css"
+}

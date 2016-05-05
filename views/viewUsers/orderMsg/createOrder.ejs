@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../layouts/head.ejs %>
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/orderMsg/createOrder.css" />
+</head>
+<body>
+<header class="header">
+    <span class="btn-black icon-angle-left"></span>
+    <h3 class="page-title"><%= title %></h3>
+</header>
+<section class="wrap-page">
+    <div class="address-info row hide">
+        <span class="add">+</span>
+        <label>您还没有收货地址，去添加收获地址</label>
+        <span class="icon-angle-right"></span>
+    </div>
+    <div class="address-info row">
+        <span class="icon-map"></span>
+        <div class="address-cont">
+            <div><label>收货人：<span id="uName"><%=userInfo.userName%></span> </label>
+                <label id="phone" class="fr"><%=userInfo.name%></label>
+            </div>
+            <p>收货地址：<span  id="address"><%=userInfo.address%></span></p>
+        </div>
+        <span class="icon-angle-right"></span>
+    </div>
+    <div id="productInfo" v-for="item in items"  class="order-list row">
+        <a class="block-item row"  href="/users/productMsg/productDetail?proNum={{ item.productNum }}" class="block-item">
+            <img v-bind:src="'/files/'+item.photoOne"/>
+            <div class="block-cont">
+                <p>{{ item.name }}</p>
+                <span class="orange ">￥{{item.price}}</span>
+                <span class="fr">×{{item.buyNum}}</span>
+                <p class="font-size12 time">{{item.addtime}}</p>
+            </div>
+        </a>
+    </div>
+    <div id="productsInfo" v-for="item in items"  class="order-list row">
+        <a class="block-item row"  href="/users/productMsg/productDetail?proNum={{ item.proInfo.productNum }}" class="block-item">
+            <img v-bind:src="'/files/'+item.proInfo.photo"/>
+            <div class="block-cont">
+                <p>{{ item.proInfo.name }}</p>
+                <span class="orange ">￥{{item.proInfo.price}}</span>
+                <span class="fr">×{{item.proInfo.buyNum}}</span>
+                <p class="font-size12 time">{{item.proInfo.addtime}}</p>
+            </div>
+        </a>
+    </div>
+    <ul class="ul-cont">
+        <li class="row">
+        <label class="col">配送方式</label>
+            <span class="wid90">快递 免邮</span>
+        </li>
+    </ul>
+</section>
+<footer class="footer row">
+    <div class="cart-summary">
+        共<span id="count" class="red">2</span>件，总金额：￥<span id="summary" class="red">3000</span></label>
+    </div>
+    <a class="buy" href="javascript:void(0)">提交订单</a>
+</footer>
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/orderMsg/createOrder.js"></script>
+</body>
+</html>

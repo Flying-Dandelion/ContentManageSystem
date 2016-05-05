@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../layouts/head.ejs %>
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/common/swiper.min.css" />
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/productMsg/productDetail.css" />
+</head>
+<body id="productInfo">
+<header class="header">
+    <span class="btn-black icon-angle-left"></span>
+    <h3 class="page-title"><%= title %></h3>
+    <a href="/users/cartList" class="btn-cart icon-cart"></a>
+</header>
+<section class="wrap-page">
+    <div   class="product-info">
+        <div id="swiper">
+            <div class="swiper-container swiper-container-horizontal">
+                <div class="swiper-wrapper" >
+                    <div class="swiper-slide" v-for="img in items.photo"><img v-bind:src="'/files/'+items.photo[$index]"></div>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <ul class="pro-info">
+            <li class="pro-name">{{ items.name }}</li>
+            <li><label>价&nbsp;&nbsp;格：</label><span class="red font-size18">￥{{ items.price}}</span>
+            <div class="fr"><label >数;量：</label>
+                <input type="button" v-on:click="reduce()" id="reduce" value="-" disabled/>
+                <input id="num" v-model="num" value="1" disabled/>
+                <input type="button" v-on:click="plus()" id="plus" value="+"/>
+            </div>
+    </li>
+        </ul>
+        <div class="pro-detail">
+            <img  v-for="img in items.photoDetail" v-bind:src="'/files/'+items.photoDetail[$index]">
+        </div>
+
+    </div>
+</section>
+<footer class="footer row">
+    <div id="addCart"><span class="icon-cart"></span>&nbsp;加入购物车</div>
+    <a class="buy" v-on:click="buy()" href="javascript:void(0)" url="/users/orderMsg/createOrder?key={{ items.productNum }}|">结算</a>
+</footer>
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/common/swiper.min.js"></script>
+<script type="text/javascript" src="/viewUsers/javascripts/productMsg/productDetail.js"></script>
+</body>
+</html>

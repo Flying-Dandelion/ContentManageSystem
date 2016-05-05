@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include layouts/head.ejs %>
+</head>
+<body class="has-panel">
+<header class="header">
+    <span id="panelSwitch" class="btn-list"></span>
+    <h3 class="page-title"><%= title %></h3>
+    <span id="editCart" class="btn-operate icon-pencil"></span>
+    <span class="btn-operate editOk hide">完成</span>
+</header>
+<section class="wrap-page">
+    <div id="list"  class="cart-list row">
+        <a class="block-item row" v-for="item in items" href="/users/productMsg/productDetail?proNum={{ item.proInfo.productNum }}" class="block-item">
+            <input type="checkbox" onclick="checkitem(this)" data-attr="{{item.proInfo.productNum}}" class="icon-checkbox" name="product" />
+            <img v-bind:src="'/files/'+item.proInfo.photo"/>
+            <div class="block-cont">
+               <p>{{ item.proInfo.name }}</p>
+                <span class="orange ">￥{{item.proInfo.price}}</span>
+                <span class="fr">×{{item.proInfo.buyNum}}</span>
+                <p class="font-size12">{{item.proInfo.addtime}}</p>
+            </div>
+        </a>
+
+    </div>
+    <div class="hide" id="noResult">
+        <span class="icon-cart"></span>&nbsp;您的购物车还是空的！
+    </div>
+</section>
+<footer class="footer row">
+    <div class="cart-summary">
+        <label class="fl"><input type="checkbox" id="checkAll" class="icon-checkbox" name="product"/>全选 </label>
+        <label class="labSummary">合计：￥<span id="summary" class="red">3000</span></label>
+    </div>
+    <input type="button" class="buy disabled" value="结算" disabled/>
+    <input type="button" class="del hide" value="删除"/>
+</footer>
+<%- include layouts/menu.ejs %>
+<%- include layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/cartList.js"></script>
+</body>
+</html>

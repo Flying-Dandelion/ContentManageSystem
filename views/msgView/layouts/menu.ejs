@@ -1,0 +1,27 @@
+<div class="top">
+    <h1 class="container title">呗<span>儿</span> <small></small></h1>
+    <div class="menu">
+        <ul class="container menu-first" name="<%= menu %>" id="menu">
+            <% if(role == 0) {%>
+            <!--<li>-->
+                <!--<a href="/sysMsg/roleMsg">系统管理</a>-->
+                <!--系统管理-->
+                <!--<ul>-->
+                <!--<li>角色管理</li>-->
+                <!--<li>权限管理</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <li><a href="/userMsg/userList">用户管理</a></li>
+            <%}%>
+            <% if(role == 0 || role == 1) {%>
+            <li><a href="/productMsg/productList">商品管理</a></li>
+            <%}%>
+            <% if(role == 0 || role == 2) {%>
+            <li><a href="/orderMsg/orderList">订单管理</a></li>
+            <%}%>
+        </ul>
+        <div class="container exit">
+            <a href="javascript:void(0);">退出</a>
+            </div>
+    </div>
+</div>

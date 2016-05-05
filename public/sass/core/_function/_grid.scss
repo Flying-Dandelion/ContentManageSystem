@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+//-----------------------------------------------------
+// grid.scss 栅格化布局
+//-----------------------------------------------------
+@mixin make-grid{
+  $x:1;
+  @while $x <= $grid-column {
+    .col-#{$x} {
+      //@include box-flex(percentage(1/$grid-column * $x))
+      @extend %flex;
+      width:percentage(1/$grid-column * $x);
+    }
+    $x: $x + 1;
+  };
+}
+
+@mixin make-grid-col{
+  $x:1;
+  @while($x <= length($grid-columns)){
+    .col-#{nth($grid-columns, $x)} {
+      width:percentage(1/nth($grid-columns, $x));
+    }
+    $x: $x + 1;
+  }
+}
+
+@mixin make-width{
+  $x:1;
+  @while($x <= length($grid-width)){
+    $width:nth($grid-width, $x);
+    .w#{$width} {
+      width:$width*1px;
+      display: inline-table;
+    }
+    $x: $x + 1;
+  }
+}
+@mixin make-padding{
+  $x:1;
+  @while($x <= length($grid-padding)){
+    $pad-width:nth($grid-padding, $x);
+    .pad-top#{$pad-width} {
+      padding-top:$pad-width*1px;
+    }
+    .pad-left#{$pad-width} {
+      padding-left:$pad-width*1px;
+    }
+    .pad-right#{$pad-width} {
+      padding-right:$pad-width*1px;
+    }
+    .pad-bottom#{$pad-width} {
+      padding-bottom:$pad-width*1px;
+    }
+    .pad#{$x} {
+      padding:$x*1px;
+    }
+    $x: $x + 1;
+  }
+}
+@mixin make-margin{
+  $x:1;
+  @while($x <= length($grid-margin)){
+    $mar-width:nth($grid-margin, $x);
+    .mar-top#{$mar-width} {
+      margin-top:$mar-width*1px;
+    }
+    .mar-left#{$mar-width} {
+      margin-left:$mar-width*1px;
+    }
+    .mar-right#{$mar-width} {
+      margin-right:$mar-width*1px;
+    }
+    .mar-bottom#{$mar-width} {
+      margin-bottom:$mar-width*1px;
+    }
+    $x: $x + 1;
+  }
+}
+%row{
+  @extend %flex-display;
+  width:100%;
+  @extend %border-box;
+  align-items: center;
+  -webkit-box-align: center;
+  justify-content: space-around;
+  -webkit-justify-content:space-around;
+  flex-flow: row wrap;
+}

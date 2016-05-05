@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../layouts/head.ejs %>
+</head>
+<body class="has-panel">
+<header class="header">
+    <span id="panelSwitch" class="btn-list"></span>
+    <h3 class="page-title"><%= title %></h3>
+    <a href="/users/cartList" class="btn-cart icon-cart"></a>
+</header>
+<section class="wrap-page">
+    <div id="typeList" class="proType-list row">
+        <span onclick="typeChange(this)">全部</span>
+        <span onclick="typeChange(this,'1')">待付款</span>
+        <span onclick="typeChange(this,'2')">待发货</span>
+        <span onclick="typeChange(this,'3')">待收货</span>
+    </div>
+    <div id="list" class="order-list row">
+       <template  v-for="item in items">
+           <div  class="block-item row" >
+               <p class="order-title">{{item.orderNum }}
+                   <span class="fr red mar-right10 font-size12">{{ item.status=="1"?"待付款":(item.status=="2"?"待发货":(item.status=="3"?"待收货":(item.status=="4"?"交易成功":"交易失败"))) }}</span></p>
+               <template v-for="product in item.proInfo">
+                <a class="block-item row"  v-bind:href="'/users/productMsg/productDetail?proNum='+product.productNum">
+                    <img v-bind:src="'/files/'+product.photo"/>
+                    <div class="block-cont">
+                        <p>{{ product.name }}</p>
+                        <span class="orange ">￥{{product.price}}</span>
+                        <span class="fr">×{{product.buyNum}}</span>
+                    </div>
+                </a>
+               </template>
+                   <p class=" mar-right10 font-size12 time">{{item.addtime}}<input type="button" v-if="item.status =='3'" onclick="setOrderStatus('{{item.orderNum}}','{{item.status}}')" class="bg-red mar-left10" value="确认收货"/></p>
+
+           </div>
+       </template>
+    </div>
+    <div id="noResult" class="hide">
+        您的订单中没有此类商品
+    </div>
+</section>
+<%- include ../layouts/menu.ejs %>
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/orderMsg/orderList.js"></script>
+</body>
+</html>

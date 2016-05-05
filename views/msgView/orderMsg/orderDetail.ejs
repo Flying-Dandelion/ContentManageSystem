@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<%- include ../layouts/head.ejs %>
+<style>
+    .form-group{
+        height:30px;
+    }
+    .control-label{
+        text-align: right;
+    }
+</style>
+<body>
+<section class="main">
+    <%- include ../layouts/menu.ejs %>
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>订单管理</li>
+            <li>订单详情</li>
+        </ul>
+        <div class="content" id="orderInfo">
+               <div class="form-group">
+                    <label for="inPhone" class="col-sm-3 control-label">订单编号</label>
+                    <div class="col-sm-8">
+                        {{ items.orderNum }}&nbsp;
+                    </div>
+                </div>
+            <div class="form-group">
+            <template v-for="item in items.proInfo">
+                <div class="form-group">
+                    <label for="inPhone" class="col-sm-3 control-label">商品编号{{$index}}</label>
+                    <div class="col-sm-6">
+                        {{ item.productNum}}&nbsp;
+                    </div>
+                </div>
+            </template>
+            </div>
+                <div class="form-group">
+                    <label for="txtPrice" class="col-sm-3 control-label">总金额</label>
+                    <div class="col-sm-8">
+                        {{items.summary}}&nbsp;
+                    </div>
+                </div>
+            <div class="form-group">
+                <label for="txtPrice" class="col-sm-3 control-label">收货地址</label>
+                <div class="col-sm-8">
+                   {{items.address}}&nbsp;
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPrice" class="col-sm-3 control-label">联系电话</label>
+                <div class="col-sm-8">
+                    {{items.telephone}}&nbsp;
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPrice" class="col-sm-3 control-label">收货人姓名</label>
+                <div class="col-sm-8">
+                    {{items.uName}}&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/msgView/javascripts/common.js"></script>
+<script src="/msgView/javascripts/common/vue.js"></script>
+<script type="text/javascript">
+    seajs.use("/msgView/javascripts/orderMsg/orderDetail", function (orderDetail) {
+        orderDetail.init();
+    });
+</script>
+</body>
+</html>

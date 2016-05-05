@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include layouts/head.ejs %>
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/main.css"/>
+    <style>
+
+        #btnSave{
+            border: 0;
+            width: 94%;
+            margin: auto;
+            display: block;
+            line-height: 30px;
+            margin-top: 20px;
+            background: #DA1F41;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <h3 class="page-title mar-left10">信息设置</h3>
+</header>
+<section class="wrap-page">
+    <input type="hidden" id="role" value="<%=role%>"/>
+    <ul class="ul-cont ">
+        <li class="row">
+          <p class="col">手机号码：<span id="phone"><%=phone%></span> </p>
+        </li>
+        <li class="row">
+            <input class="col" placeholder="用户名" id="txtName" type="text"/>
+        </li>
+        <li class="row"> <input class="col" id="txtAddress" placeholder="地址" type="text"/>
+        </li>
+    </ul>
+    <input type="button" value="保存，去登陆" id="btnSave" />
+</section>
+<%- include layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/setInfo.js"></script>
+</body>
+</html>

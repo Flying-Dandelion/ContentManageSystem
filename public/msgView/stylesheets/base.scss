@@ -1,0 +1,79 @@
+@charset "UTF-8";
+$type-list:top,left,right,bottom;
+$mar-pad-list:10px,20px,50px,100px;
+$height-list:200px,150px,100px,50px;
+$width-list:200px,150px,100px,80px,50px,30px;
+$wid-list:.2,.25,.5,.6,.75,.8,.9,.96,.98,1;
+//strip units
+@function strip-units($number){
+  @return $number / ($number * 0 + 1);
+}
+@mixin margin-padding($class,$type){
+  @each $width in $mar-pad-list{
+    $width-num: strip-units($width);
+    .#{$class}-#{$type}#{$width-num} {
+      @if "#{$class} == mar" {
+        margin-#{$type}: $width;
+      } @else if "#{$class} == pad" {
+        padding-#{$type}: $width;
+      }
+    }
+  }
+}
+@mixin mar-pad(){
+  @each $type in $type-list{
+    @include margin-padding(pad,$type);
+    @include margin-padding(mar,$type);
+  }
+}
+@mixin width(){
+  @each $item in $width-list {
+    .w#{$item / ($item * 0 + 1)}{
+      width: $item;
+
+    }
+    .w#{$item / ($item * 0 + 1)}.form-control{
+      @extend .w#{$item / ($item * 0 + 1)};
+    }
+  }
+  @each $item in $wid-list{
+    .wid#{$item * 100}{
+      width: percentage($item);
+    }
+  }
+}
+@mixin  height(){
+
+  @each $item in $height-list {
+    .h#{$item / ($item * 0 + 1)}{
+      height: $item;
+    }
+  }
+}
+@mixin linear($top-base-bg-color,$middle-base-bg-color,$bottom-base-bg-color){
+  background-color: $middle-base-bg-color;
+  background: -moz-linear-gradient(top,  $top-base-bg-color 0%, $middle-base-bg-color 80%, $bottom-base-bg-color 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top-base-bg-color), color-stop(80%,$middle-base-bg-color), color-stop(100%,$bottom-base-bg-color));
+  background: -webkit-linear-gradient(top,  $top-base-bg-color 0%,$middle-base-bg-color 80%,$bottom-base-bg-color 100%);
+  background: -o-linear-gradient(top,  $top-base-bg-color 0%,$middle-base-bg-color 80%,$bottom-base-bg-color 100%);
+  background: -ms-linear-gradient(top,  $top-base-bg-color 0%,$middle-base-bg-color 80%,$bottom-base-bg-color 100%);
+  background: linear-gradient(to bottom,  $top-base-bg-color 0%,$middle-base-bg-color 80%,$bottom-base-bg-color 100%);
+}
+@mixin border-radius($border-radius){
+  border-radius:$border-radius ;
+  -moz-border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+}
+
+@include mar-pad();
+@include width();
+@include height();
+.red{
+  color:red;
+}
+.gray{
+  color:#bbb;
+}
+.bg-red{
+  background-color: #DA1F41
+}

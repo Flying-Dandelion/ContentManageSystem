@@ -1,0 +1,24 @@
+.nav-aside {
+  line-height: 40px;
+ li {
+   color: #fff;
+   a {
+     color: #fff;
+     padding: 0 10px;
+     display: block;
+     &:active,&:hover,&:active{
+       background-color: #E46F69;
+     }
+   }
+ }
+  .user-info{
+    >a{
+      padding-top:20px;
+    }
+    img{
+      width:56px;
+      height:56px;
+      border-radius: 50%;
+    }
+  }
+}

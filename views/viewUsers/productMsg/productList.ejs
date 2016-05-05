@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../layouts/head.ejs %>
+</head>
+<body class="has-panel">
+<header class="header">
+    <span id="panelSwitch" class="btn-list"></span>
+    <h3 class="page-title"><%= title %></h3>
+    <a href="/users/cartList" class="btn-cart icon-cart"></a>
+</header>
+<section class="wrap-page">
+    <div id="typeList" class="proType-list row">
+        <span onclick="typeChange(this)">全部</span>
+        <template  v-for="item in items">
+            <span onclick="typeChange(this,'{{item.sort}}')">{{ item.name}}</span>
+        </template >
+    </div>
+    <div id="list"  class="pro-list row">
+        <div  class="list-item">
+        <template  v-for="item in items">
+            <a  v-if="($index % 2 == 0)" href="/users/productMsg/productDetail?proNum={{ item.productNum }}" class="block-item">
+                <img v-bind:src="'/files/'+item.photoOne"/>
+                <div class="block-instr">
+                    {{ item.name }}
+                </div>
+            </a>
+        </template >
+            </div>
+        <div  class="list-item">
+        <template  v-for="item in items">
+            <a  v-if="($index % 2 == 1)" href="/users/productMsg/productDetail?proNum={{ item.productNum }}" class="block-item">
+                <img v-bind:src="'/files/'+item.photoOne"/>
+                <div class="block-instr">
+                    {{ item.name }}
+                </div>
+            </a>
+        </template >
+            </div>
+    </div>
+    <div id="noResult" class="hide">
+        不好意思，还没有该类商品哦！
+    </div>
+</section>
+<%- include ../layouts/menu.ejs %>
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/productMsg/productList.js"></script>
+</body>
+</html>

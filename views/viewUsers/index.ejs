@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include layouts/head.ejs %>
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/common/swiper.min.css" />
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/index.css" />
+</head>
+<body class="has-panel">
+<header class="header">
+    <span id="panelSwitch" class="btn-list"></span>
+    <h3 class="page-title">首页</h3>
+    <a href="/users/cartList" class="btn-cart icon-cart"></a>
+</header>
+<section class="wrap-page">
+    <div id="swiper">
+        <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/viewUsers/images/slide/ad1.jpg"></div>
+                <div class="swiper-slide"><img src="/viewUsers/images/slide/ad2.jpg"></div>
+                <div class="swiper-slide"><img src="/viewUsers/images/slide/ad3.jpg"></div>
+                <div class="swiper-slide"><img src="/viewUsers/images/slide/ad4.jpg"></div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div id="list"  class="type-list row">
+        <a  v-for="item in items" href="/users/productMsg/productList?type={{ item.type}}" class="type-item row icon">
+            <div>
+                <p class="icon-tags"></p>
+                <span>{{ item.name }} </span>
+            </div>
+        </a>
+    </div>
+    <div class="ad">
+        <img src="/viewUsers/images/ad/1.jpg"/>
+        <img src="/viewUsers/images/ad/3.jpg"/>
+        <img src="/viewUsers/images/ad/4.jpg"/>
+    </div>
+</section>
+<%- include layouts/menu.ejs %>
+<%- include layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/common/swiper.min.js"></script>
+<script type="text/javascript" src="/viewUsers/javascripts/index.js"></script>
+</body>
+</html>

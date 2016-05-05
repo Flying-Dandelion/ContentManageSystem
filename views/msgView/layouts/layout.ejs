@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/msgView/stylesheets/common/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/msgView/stylesheets/common/animate.min.css" />
+	<link rel="stylesheet" type="text/css" href="/msgView/stylesheets/style.css" />
+</head>
+<body>
+<script type="text/javascript" src="/msgView/javascripts/common/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/msgView/javascripts/common/sea.js"></script>
+	<script type="text/javascript" src="/msgView/javascripts/common/layer/layer.js"></script>
+	<script type="text/javascript">
+		seajs.config({
+			// Sea.js 的基础路径
+			base: "/javascripts",
+			
+			// 别名配置
+			alias:{
+				"utils" : "common/utils.js",
+				"index" : "index.js"
+			},
+			
+			// 预加载项
+			preload: ['utils'],
+			
+			// 调试模式
+  			debug: true
+		});
+	</script>
+</body>
+</html>

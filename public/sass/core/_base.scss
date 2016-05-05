@@ -1,0 +1,208 @@
+@charset "UTF-8";
+//  base
+html{
+  height: 100%;
+  font-size: $fontSizeBase;
+  background-color: #fcfcfc;
+}
+body{
+  font-size: $fontSize;
+  font-family: $fontFamily;
+  line-height: $fontLineHeight;
+  color: $colorText;
+  background-color: $colorBg;
+  max-width: 980px;
+  min-width:320px;
+  min-height: 100%;
+  overflow-x: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+// Links
+//-----------------------------------------------------
+// 1. Improve readability when focused and also mouse hovered in all browsers.
+
+a {
+  &:active {
+    outline: 0; // 1
+  }
+  @if length($colorLink) > 1 {
+    color: nth($colorLink, 1);
+    &:hover {
+      color: nth($colorLink, 2);
+    }
+  }
+  @else {
+    color: $colorLink;
+    &:hover {
+      color: darken($colorLink, 10%);
+    }
+  }
+  &,&:active,a:link,&:hover,&:visited{
+    text-decoration: none;
+  }
+}
+// Tables
+//-----------------------------------------------------
+// Remove most spacing between table cells.
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, form, blockquote {
+  margin: 0;
+}
+
+// ul ol dl
+ul, ol, li, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul,ol{
+  list-style: none;
+}
+
+img {
+  border: 0; // 1
+
+}
+
+textarea{
+  resize:none;
+  overflow:auto;
+}
+
+:focus {
+  outline: 0
+}
+input,button, select, optgroup, textarea{
+  font-family: $fontFamily;
+  display: inline-block;
+  width: auto;
+  padding: 2px 3px;
+  font-size: 1.2em;
+  line-height: 1.42857;
+  background-color: transparent;
+}
+input[type="text"],input[type="submit"],input[type="reset"],input[type="button"]{
+  border: solid #dddddd;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  background-image: none;
+}
+input[type="button"],input[type="submit"],input[type="reset"],button, select, optgroup, textarea {
+  border: 1px solid #dddddd;
+  background-image: none;
+  border-radius: 4px;
+  &:focus {
+    background-color: #eee;
+    border-color: #bbb;
+    outline: 0;
+  }
+}
+
+/*清除子元素浮动*/
+.clearfix {
+  @extend %clearfix;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body>img{
+  width:100%;
+}
+img{
+  vertical-align: middle;
+}
+.photo>img{
+  width:100%;
+}
+input{
+  border:0;
+  padding: 2px 5px;
+  font-size: .14rem;
+}
+.main-color{
+  color:#17B8C3;
+}
+.orange{
+  color:orange;
+}
+.red{
+  color:#DA1F41;
+}
+.claret-red{
+  color:#D60001;
+}
+.green{
+  color:lightgreen;
+}
+.black{
+  color:#555;
+}
+.hide{
+  display: none;
+}
+.text-right{
+  text-align: right;
+}
+.text-center{
+  text-align: center;
+}
+.bg-white{
+  background-color: white;
+}
+.bg-orange{
+  background-color: orange;
+}
+.bg-main{
+  background-color:#17B8C3 ;
+}
+.bg-gray{
+background-color: $colorBg;
+}
+.bg-red{
+  background-color: #DA1F41
+}
+input[type="text"]{
+  border:0;
+}
+.font-size12{
+  font-size: .12rem;
+}
+.font-size15{
+  font-size:.15rem;
+}
+.font-size16{
+  font-size:.16rem;
+}
+.font-size18{
+  font-size: .18rem;
+}

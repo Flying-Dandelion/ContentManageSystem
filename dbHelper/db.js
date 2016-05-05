@@ -1,7 +1,5 @@
 /*dbHelper 数据库操作*/
 var MClient = require('mongodb').MongoClient;
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
 var config = require("./dbConfig.json");
 
 //链接数据库字符串
@@ -65,7 +63,7 @@ module.exports.update=function(opts){
     var updateData = function(db,opts,callback) {
         var collection = opts.collection,
             doc = opts.doc;
-        db.collection(collection).update(doc.query,doc.set,function (err,result) {
+        db.collection(collection).update(doc.query,doc.set,{ upsert: false, multi: true },function (err,result) {
             if (err) {
                 console.log('Error:' + err);
                 return;

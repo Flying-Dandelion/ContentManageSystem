@@ -13,7 +13,6 @@ exports.userLogin = function(doc,callback){
 		"doc": doc,
 		callback: callback
 	};
-
 	//insert方法： 插入一条或多条数据。
 	dbHelper.select(opts);
 };

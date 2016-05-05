@@ -1,0 +1,206 @@
+@charset "UTF-8";
+.type-list {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: white;
+  font-size: 12px;
+  padding-left: .5%; }
+  .type-list .icon-tags {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    margin: auto; }
+    .type-list .icon-tags::before {
+      font-size: 22px; }
+  .type-list .type-item {
+    flex: 0 0 24.5%;
+    height: 80px;
+    margin: .5%;
+    margin-left: 0;
+    border: 1px solid white;
+    background: #fb7070; }
+    .type-list .type-item:focus, .type-list .type-item:active {
+      transform: scale(0.9); }
+  .type-list .icon {
+    text-align: center;
+    color: white; }
+
+.ad {
+  background: white; }
+  .ad img {
+    width: 100%;
+    margin-top: 5px; }
+
+@font-face {
+  font-family: icomoon;
+  font-weight: normal;
+  font-style: normal;
+  src: url("/viewUsers/stylesheets/common/fonts/icomoon.eot");
+  src: url("/viewUsers/stylesheets/common/fonts/icomoon.eot?#iefix") format("eot"), url("/viewUsers/stylesheets/common/fonts/icomoon.svg#icomoon") format("svg"), url("/viewUsers/stylesheets/common/fonts/icomoon.woff") format("woff"), url("/viewUsers/stylesheets/common/fonts/icomoon.ttf") format("truetype"); }
+.icon-wifi::before, .icon-comment::before, .icon-user::before, .icon-map::before, .icon-cart::before, .icon-date::before, .icon-music::before, .icon-home::before, .icon-image::before, .icon-video::before, .icon-tags::before, .icon-qrcode::before, .icon-forward::before, .icon-back::before, .icon-loading::before, .icon-refresh::before, .icon-search::before, .icon-con::before, .icon-gift::before, .icon-trashcan::before, .icon-logout::before, .icon-files::before, .icon-question::before, .icon-info::before, .icon-alert::before, .icon-arrow-up::before, .icon-arrow-right::before, .icon-arrow-down::before, .icon-arrow-left::before, .icon-checkbox-checked::before, .icon-checkbox::before, .icon-radio-checked::before, .icon-radio::before, .icon-mail::before, .icon-heart::before, .icon-star::before, .icon-voice::before, .icon-voice-no::before, .icon-pencil::before, .icon-list::before, .icon-lock::before, .icon-phone::before, .icon-target::before, .icon-card::before, .icon-checkmark::before, .icon-cross::before, .icon-angle-up::before, .icon-angle-right::before, .icon-angle-down::before, .icon-angle-left::before {
+  display: inline-block;
+  vertical-align: -2px;
+  font-family: icomoon;
+  font-size: 18px;
+  line-height: 1;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box; }
+
+.icon-wifi::before {
+  content: ""; }
+
+.icon-comment::before {
+  content: ""; }
+
+.icon-user::before {
+  content: ""; }
+
+.icon-map::before {
+  content: ""; }
+
+.icon-cart::before {
+  content: ""; }
+
+.icon-date::before {
+  content: ""; }
+
+.icon-music::before {
+  content: ""; }
+
+.icon-home::before {
+  content: ""; }
+
+.icon-image::before {
+  content: ""; }
+
+.icon-video::before {
+  content: ""; }
+
+.icon-tags::before {
+  content: ""; }
+
+.icon-qrcode::before {
+  content: ""; }
+
+.icon-forward::before {
+  content: ""; }
+
+.icon-back::before {
+  content: ""; }
+
+.icon-loading::before {
+  content: ""; }
+
+.icon-refresh::before {
+  content: ""; }
+
+.icon-search::before {
+  content: ""; }
+
+.icon-con::before {
+  content: ""; }
+
+.icon-gift::before {
+  content: ""; }
+
+.icon-trashcan::before {
+  content: ""; }
+
+.icon-logout::before {
+  content: ""; }
+
+.icon-files::before {
+  content: ""; }
+
+.icon-question::before {
+  content: ""; }
+
+.icon-info::before {
+  content: ""; }
+
+.icon-alert::before {
+  content: ""; }
+
+.icon-arrow-up::before {
+  content: ""; }
+
+.icon-arrow-right::before {
+  content: ""; }
+
+.icon-arrow-down::before {
+  content: ""; }
+
+.icon-arrow-left::before {
+  content: ""; }
+
+.icon-checkbox-checked::before {
+  content: ""; }
+
+.icon-checkbox::before {
+  content: ""; }
+
+.icon-radio-checked::before {
+  content: ""; }
+
+.icon-radio::before {
+  content: ""; }
+
+.icon-mail::before {
+  content: ""; }
+
+.icon-heart::before {
+  content: ""; }
+
+.icon-star::before {
+  content: ""; }
+
+.icon-voice::before {
+  content: ""; }
+
+.icon-voice-no::before {
+  content: ""; }
+
+.icon-pencil::before {
+  content: ""; }
+
+.icon-list::before {
+  content: ""; }
+
+.icon-lock::before {
+  content: ""; }
+
+.icon-phone::before {
+  content: ""; }
+
+.icon-target::before {
+  content: ""; }
+
+.icon-card::before {
+  content: ""; }
+
+.icon-checkmark::before {
+  content: ""; }
+
+.icon-cross::before {
+  content: ""; }
+
+.icon-angle-up::before {
+  content: ""; }
+
+.icon-angle-right::before {
+  content: ""; }
+
+.icon-angle-down::before {
+  content: ""; }
+
+.icon-angle-left::before {
+  content: ""; }
+
+/*# sourceMappingURL=index.css.map */

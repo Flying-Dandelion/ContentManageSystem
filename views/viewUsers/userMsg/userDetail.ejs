@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../layouts/head.ejs %>
+    <style>
+
+        #btnSave{
+            border: 0;
+            width: 94%;
+            margin: auto;
+            display: block;
+            line-height: 30px;
+            margin-top: 20px;
+            background: #DA1F41;
+            color:white;
+        }
+    </style>
+</head>
+<header class="header">
+    <span id="btnBack" class="btn-black  icon-angle-left"></span>
+    <h3 class="page-title">个人信息</h3>
+    <span class="btn-cart"></span>
+</header>
+
+<section class="wrap-page">
+    <input type="hidden" id="role" value="<%=userInfo.role%>"/>
+    <ul class="ul-cont ">
+        <li class="row">
+            <p class="col">手机号码：<span id="phone"><%=userInfo.name%></span> </p>
+        </li>
+        <li class="row">
+            <span class="w80 text-right">用户名：</span> <input class="col" placeholder="用户名" id="txtName" value="<%=userInfo.userName%>" type="text"/>
+        </li>
+        <li class="row"><span class="w80 text-right">收货地址：</span>  <input class="col" id="txtAddress" value="<%=userInfo.address%>" placeholder="收货地址" type="text"/>
+        </li>
+    </ul>
+    <input type="button" value="保存" id="btnSave" />
+</section>
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/userMsg/userDetail.js"></script>
+</body>
+</html>

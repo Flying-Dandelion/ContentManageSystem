@@ -31,7 +31,21 @@ exports.addProduct = function (doc, callback) {
     //insert方法： 插入一条或多条数据。
     dbHelper.insert(opts);
 };
-
+/**
+ * 添加商品
+ * @param doc
+ * @param callback
+ */
+exports.updateProduct = function (doc, callback) {
+    var opts = {
+        "collection": "products",
+        "doc": doc,
+        callback: callback
+    };
+    console.log(doc);
+    //insert方法： 插入一条或多条数据。
+    dbHelper.update(opts);
+};
 /**
  * 删除用户
  * @param doc

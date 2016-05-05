@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<%- include ../layouts/head.ejs %>
+<body>
+<section class="main">
+    <%- include ../layouts/menu.ejs %>
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>用户管理</li>
+            <li>用户列表</li>
+        </ul>
+        <div class="content">
+            <input id="pageIndex" type="hidden" value="1"/>
+            <input id="type" type="hidden" value="0"/>
+            <div class="mar-bottom20">
+                <div class="form-group col-sm-4">
+                    用户名：<input type="text" class="form-control input-sm w100" id="txtUserName" />
+                </div>
+            <div class="form-group col-sm-4">
+                手机号：<input type="text" class="form-control input-sm w100" id="txtPhone" />
+            </div>
+            <div class="form-group col-sm-4">
+                角色：<select class="form-control input-sm  w100" id="txtRole">
+                    <option value="">全部</option>
+                    <option value="0">系统管理员</option>
+                    <option value="1">采购员</option>
+                    <option value="2">销售员</option>
+                    <option value="3">普通用户</option>
+                </select>
+            </div>
+                </div>
+            <div class="mar-bottom20">
+            <div class="form-group col-sm-8">
+                注册时间：<input type="text" class="form-control input-sm w100" value="2016-01-01"  id="txtAddTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtAddTimeEnd\')}',isShowClear:false,readOnly:true})"  />
+                ~<input type="text" class="form-control input-sm w100"  id="txtAddTimeEnd"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtAddTimeStart\')}',isShowClear:false,readOnly:true})" />
+            </div>
+            <input type="button" class="btn btn-sm btn-danger" value="查询" id="btnQuery" />
+            <input type="button" class="btn btn-sm btn-default" value="清除条件" id="btnClear" />
+            <input type="button" class="btn btn-sm btn-danger" value="添加用户" id="btnAddLayer" />
+                </div>
+        <table class="table table-striped text-center" >
+            <thead>
+            <tr>
+                <th class="text-center">用户名</th>
+                <th class="text-center">手机号码</th>
+                <th class="text-center">注册时间</th>
+                <th class="text-center">角色</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody id="userList">
+                <template  v-for="item in items">
+                    <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.addtime }}</td>
+                    <td>{{ item.rolename }}</td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="editUser('{{ item.name }}','{{ item.phone }}','{{ item.role }}','{{ item.password }}','{{item.address}}')">修改信息</a>
+                        <a href="javascript:void(0);" onclick="deleteUser('{{ item.phone }}')">删除</a>
+                    </td>
+                    </tr>
+                </template >
+            </tbody>
+        </table>
+            <div class="page-bar mar-top20">
+                <ul class="clearfix">
+                    <li v-if="showFirst"><a v-on:click="cur--">上一页</a></li>
+                    <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+                        <a v-on:click="btnClick(index);">{{ index }}</a>
+                    </li>
+                    <li v-if="showLast"><a v-on:click="cur++">下一页</a></li>
+                    <li><a>共<i>{{all}}</i>页</a></li>
+                </ul>
+            </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</section>
+<div id="layer-addUser" class="hide" >
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="inPhone" class="col-sm-5 control-label"><span class="red">*</span>手机号码</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control input-sm" id="inPhone" maxlength="11" placeholder="手机号码" onkeyup="this.value=this.value.replace(/\D/g,'')" onchange="this.value=this.value.replace(/\D/g,'')"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inUsername" class="col-sm-5 control-label">用户名</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control input-sm" id="inUsername" placeholder="用户名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inPWD" class="col-sm-5 control-label">密码</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control input-sm" value="111111" id="inPWD" placeholder="密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inRole" class="col-sm-5 control-label">角色</label>
+            <div class="col-sm-7">
+                <select class="form-control input-sm" id="selRole">
+                    <option value="0">系统管理员</option>
+                    <option value="1">采购员</option>
+                    <option value="2">销售员</option>
+                    <option value="3">普通用户</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group address" style="visibility: hidden">
+            <label for="inAddress" class="col-sm-5 control-label">收货地址</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control input-sm"  id="inAddress" placeholder="收货地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-7">
+                <input type="button" class="btn btn-sm btn-danger w100" value="保存" id="btnAddUser" />
+            </div>
+        </div>
+</div>
+    </div>
+<%- include ../layouts/footer.ejs %>
+<script src="/msgView/javascripts/common/vue.js"></script>
+<script src="/msgView/javascripts/common/page.js"></script>
+<script type="text/javascript">
+    seajs.use("/msgView/javascripts/userMsg/userList", function(userList){
+        userList.init();
+    });
+
+</script>
+</body>
+</html>

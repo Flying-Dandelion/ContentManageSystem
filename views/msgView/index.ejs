@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<%- include layouts/head.ejs %>
+<body>
+<section class="main">
+    <%- include layouts/menu.ejs %>
+    <div class="container">
+       <div class="content index">
+           欢迎
+           <span class="red"><%= user %></span>
+           进入呗儿后台管理系统<br/>
+           您是本系统的<span class="red"><% if(role == 0) {%>
+           超级管理员
+           <%}else if(role == 1) {%>
+          采购员
+           <%}else if( role == 2) {%>
+            销售员
+           <%}%></span>
+       </div>
+    </div>
+</section>
+</body>
+<%- include  layouts/footer.ejs%>
+</html>

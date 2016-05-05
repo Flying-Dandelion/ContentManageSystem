@@ -1,0 +1,27 @@
+<script type="text/javascript" src="/msgView/javascripts/common/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/msgView/javascripts/common/layer2.1/layer.js"></script>
+<script src="/msgView/javascripts/common/moment.min.js"></script>
+<script type="text/javascript" src="/msgView/javascripts/common/sea.js"></script>
+<script type="text/javascript" src="/msgView/javascripts/common/My97DatePicker4.8/WdatePicker.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        // Sea.js �Ļ�·��
+        base: "/msgView/javascripts/",
+
+        // ��������
+        alias:{
+            "utils" : "common/utils.js",
+            "index" : "index.js",
+            "main":"common/main.js"
+        },
+
+        // Ԥ������
+        preload: ['utils'],
+
+        // ����ģʽ
+        debug: true
+    });
+    seajs.use("main", function(main){
+        main.init();
+    });
+</script>

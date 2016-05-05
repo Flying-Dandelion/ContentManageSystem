@@ -1,0 +1,27 @@
+/* panel */
+.has-panel {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  &.panel-active{
+    -webkit-transform: translate3d(150px, 0, 0);
+    transform: translate3d(150px, 0, 0);
+    overflow-x:hidden;
+  }
+  .panel {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: 0;
+    z-index: 980;
+    width: 150px;
+    background-color: #e2140a;
+    -webkit-transform: translate3d(-150px, 0, 0);
+    transform: translate3d(-150px, 0, 0);
+  }
+  .exit{
+    position:absolute;
+    bottom:0;
+    left:10px;
+    color:white;
+  }
+}

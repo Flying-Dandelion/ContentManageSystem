@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+@import "_function/grid";
+//-----------------------------------------------------
+// grid.scss 栅格化布局
+//-----------------------------------------------------
+.row{
+  @extend %row;
+}
+.col{
+  @extend %flex;
+  width:100%;
+  @extend %border-box;
+}
+
+.container{
+  width:98%;
+  display: block;
+  margin:0 auto;
+}
+@include make-width;
+@include make-padding;
+@include make-margin;
+@include make-grid-col;

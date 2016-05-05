@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include layouts/head.ejs %>
+    <link type="text/css" rel="stylesheet" href="/viewUsers/stylesheets/login.css"/>
+</head>
+<body>
+<section>
+    <div class="login-item">
+        <div class="icon-user"></div>
+    </div>
+    <div class="login-item">
+        <input type="text" id="txtPhone" placeholder="手机号码/用户名"/>
+    </div>
+    <div class="login-item">
+        <input type="password" id="txtPwd" placeholder="密码"/>
+    </div>
+    <div class="login-item">
+        <input type="button" value="登    录" id="btnLogin"/>
+    </div>
+    <div class="login-item">
+        <a href="/users/register">注&nbsp;册</a>
+        <!--|<a href="#">忘记密码</a>-->
+    </div>
+</section>
+<%- include layouts/footer.ejs %>
+<script type="text/javascript" src="/viewUsers/javascripts/login.js"></script>
+</body>
+</html>
